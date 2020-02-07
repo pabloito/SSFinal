@@ -1,4 +1,4 @@
-package SS-G10-2019b;
+package ar.edu.itba.ss2019b;
 
 import static org.junit.Assert.assertTrue;
 
