@@ -16,6 +16,9 @@ public class Delays{
     public static Delay GHOSTDELAY(){
         return new GhostDelay();
     }
+    public static Delay MOVEMENTDELAY(){
+        return new MovementDelay();
+    }
 
     private static class NoDelay implements Delay {
         @Override
@@ -36,6 +39,12 @@ public class Delays{
         }
     }
     private static class GhostDelay implements Delay {
+        @Override
+        public boolean isOver(double currentTime) {
+            return true; //todo
+        }
+    }
+    private static class MovementDelay implements Delay {
         @Override
         public boolean isOver(double currentTime) {
             return true; //todo
