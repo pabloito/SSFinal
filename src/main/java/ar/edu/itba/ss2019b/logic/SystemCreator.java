@@ -19,7 +19,7 @@ public final class SystemCreator {
     public static Airplane getInitialSystem() throws IOException {
         Map<Location, Passenger> passengerMap = getPassengerMap();
         Map<Integer, Delay> delayMap = getDelayMap();
-        return new Airplane(passengerMap, delayMap);
+        return new Airplane(0,passengerMap, delayMap);
     }
 
     private static Map<Location, Passenger> getPassengerMap() throws IOException {
@@ -29,7 +29,7 @@ public final class SystemCreator {
         List<Location> goals = getGoalList();
         for(int i=0; i< SystemConfig.getInstance().PASSENGER_QUANITTY();i++){
             Location location = grid.getLocation(i,c.AIRPLANE_CENTER());
-            passengerMap.put(location,new Passenger(location,goals.get(i)));
+            passengerMap.put(location,new Passenger(i,location,goals.get(i)));
         }
         return passengerMap;
     }
