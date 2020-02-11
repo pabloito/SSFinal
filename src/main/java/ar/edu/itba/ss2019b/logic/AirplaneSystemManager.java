@@ -20,14 +20,9 @@ public class AirplaneSystemManager {
         nextDelayMap = new HashMap<>();}
 
     public Airplane getNextAirplane(Airplane airplane, double delta){
-        if(counter==c.PASSENGER_QUANITTY()){
-            System.out.printf("All %d passengers arrived!\n",counter);
-            return null;
-        }
-
         resetMaps();
         calculatePositionsAndDelays(airplane,delta);
-        return new Airplane(airplane.getTime()+delta,nextPassengerMap,nextDelayMap);
+        return new Airplane(airplane.getTime()+delta,nextPassengerMap,nextDelayMap, counter);
     }
 
     private void resetMaps() {

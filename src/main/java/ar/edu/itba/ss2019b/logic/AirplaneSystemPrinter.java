@@ -9,7 +9,7 @@ public class AirplaneSystemPrinter {
     private static String METRIC_OUTPUT_PATH;
     private SystemConfig c;
 
-    private static String header = "time,distance,speed,x,y\n";
+    private static String header = "time,sitting\n";
 
     public AirplaneSystemPrinter(){
         this.c = SystemConfig.getInstance();
@@ -33,13 +33,9 @@ public class AirplaneSystemPrinter {
         Helper.appendToFile(sb.toString(),PARTICLE_OUTPUT_PATH);
     }
 
-    public void printAirplaneMetrics(AirplaneMetrics am) {
-//        String sb = String.valueOf(sm.getTime()) + ',' +
-//                sm.getDistanceCovered() + ',' +
-//                sm.getInstantSpeed() + ',' +
-//                sm.getX() + ',' +
-//                sm.getY() + '\n';
-//        Helper.appendToFile(sb,METRIC_OUTPUT_PATH); todo:
-
+    public void printAirplaneMetrics(Airplane airplane) {
+        String sb = String.valueOf(airplane.getTime()) + ',' +
+                airplane.getPassengersSat() + '\n';
+        Helper.appendToFile(sb,METRIC_OUTPUT_PATH);
     }
 }

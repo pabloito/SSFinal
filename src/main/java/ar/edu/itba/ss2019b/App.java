@@ -14,6 +14,7 @@ import java.io.IOException;
 public class App 
 {
     public static void main( String[] args ) throws IOException {
+        SystemConfig c = SystemConfig.getInstance();
         AirplaneSystemManager asm = new AirplaneSystemManager();
         AirplaneSystemPrinter asp = new AirplaneSystemPrinter();
         Airplane airplane = SystemCreator.getInitialSystem();
@@ -23,10 +24,17 @@ public class App
         while(!stop){
             if(counter%20==0) {
                 asp.printAirplane(airplane);
+                asp.printAirplaneMetrics(airplane);
                 System.out.printf("Running and Printing step #%d\n", counter);
             }
             airplane = asm.getNextAirplane(airplane,delta);
-            stop = airplane==null;
+
+            if(airplane.getPassengersSat()==c.PASSENGER_QUANITTY()){
+                System.out.printf("All %d passengers arrived!\n",airplane.getPassengersSat());
+                stop = true;
+                asp.printAirplane(airplane);
+                asp.printAirplaneMetrics(airplane);
+            }
             counter++;
         }
     }
