@@ -16,12 +16,13 @@ public class AirplaneSystemManager {
 
     private int counter=0;
 
-    public AirplaneSystemManager(){}
+    public AirplaneSystemManager(){
+        nextDelayMap = new HashMap<>();}
 
     public Airplane getNextAirplane(Airplane airplane, double delta){
         if(counter==c.PASSENGER_QUANITTY()){
             System.out.printf("All %d passengers arrived!\n",counter);
-            throw new IllegalArgumentException();
+            return null;
         }
 
         resetMaps();
@@ -31,7 +32,6 @@ public class AirplaneSystemManager {
 
     private void resetMaps() {
         nextPassengerMap = new HashMap<>();
-        nextDelayMap = new HashMap<>();
     }
 
     private void calculatePositionsAndDelays(Airplane airplane, double delta) {
@@ -57,7 +57,7 @@ public class AirplaneSystemManager {
         if(p.getDirection()==Direction.RIGHT)
             return grid.getNextLocation(p.getLocation(),Direction.RIGHT);
         System.out.printf("Passenger %d arrived at Location x: %d, y: %d\n",p.getId(),p.getGoal().getX(),p.getGoal().getY());
-
+        counter++;
         return p.getGoal();
     }
 

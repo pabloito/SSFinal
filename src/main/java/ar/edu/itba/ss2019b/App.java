@@ -19,10 +19,15 @@ public class App
         Airplane airplane = SystemCreator.getInitialSystem();
         double delta = 0.05;
         int counter =0;
-        while(true){
-            System.out.printf("Running #%d\n",counter++);
+        boolean stop=false;
+        while(!stop){
+            if(counter%20==0) {
+                asp.printAirplane(airplane);
+                System.out.printf("Running and Printing step #%d\n", counter);
+            }
             airplane = asm.getNextAirplane(airplane,delta);
-            asp.printAirplane(airplane);
+            stop = airplane==null;
+            counter++;
         }
     }
 }
