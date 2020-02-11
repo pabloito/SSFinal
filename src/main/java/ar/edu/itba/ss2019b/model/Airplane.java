@@ -28,7 +28,7 @@ public class Airplane {
         return time;
     }
 
-    public double getPassengersSat(){
+    public int getPassengersSat(){
         return passengersSat;
     }
 

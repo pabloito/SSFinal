@@ -19,6 +19,8 @@ public final class SystemConfig {
     private double DELAY_GETUP;
     private double DELAY_BAGS;
     private double DELAY_MOVEMENT;
+    private double DELAY_STD;
+
     private int AIRPLANE_HEIGHT;
     private int AIRPLANE_WIDTH;
     private int HORIZONTAL_OFFSET;
@@ -67,6 +69,7 @@ public final class SystemConfig {
         String DELAY_GETUP = document.getElementsByTagName("DELAY_GETUP").item(0).getTextContent();
         String DELAY_BAGS = document.getElementsByTagName("DELAY_BAGS").item(0).getTextContent();
         String DELAY_MOVEMENT = document.getElementsByTagName("DELAY_MOVEMENT").item(0).getTextContent();
+        String DELAY_STD = document.getElementsByTagName("DELAY_STD").item(0).getTextContent();
 
         String AIRPLANE_WIDTH = document.getElementsByTagName("AIRPLANE_WIDTH").item(0).getTextContent();
         String AIRPLANE_HEIGHT = document.getElementsByTagName("AIRPLANE_HEIGHT").item(0).getTextContent();
@@ -82,6 +85,7 @@ public final class SystemConfig {
         this.DELAY_GETUP = Double.parseDouble(DELAY_GETUP);
         this.DELAY_BAGS = Double.parseDouble(DELAY_BAGS);
         this.DELAY_MOVEMENT = Double.parseDouble(DELAY_MOVEMENT);
+        this.DELAY_STD = Double.parseDouble(DELAY_STD);
 
         this.AIRPLANE_HEIGHT = Integer.parseInt(AIRPLANE_HEIGHT);
         this.AIRPLANE_WIDTH = Integer.parseInt(AIRPLANE_WIDTH);
@@ -94,6 +98,7 @@ public final class SystemConfig {
     public double DELAY_GHOST(){return DELAY_GHOST;}
     public double DELAY_GETUP(){return DELAY_GETUP;}
     public double DELAY_BAGS(){return DELAY_BAGS;}
+    public double DELAY_STD(){return DELAY_STD;}
     public int AIRPLANE_HEIGHT(){return AIRPLANE_HEIGHT;}
     public int AIRPLANE_WIDTH(){return AIRPLANE_WIDTH;}
     public int HORIZONTAL_OFFSET(){return HORIZONTAL_OFFSET;}

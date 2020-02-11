@@ -5,8 +5,10 @@ import ar.edu.itba.ss2019b.inter.Delay;
 
 public class Delays{
 
+    private static NoDelay noDelayInstance = new NoDelay();
+
     public static Delay NODELAY(){
-        return new NoDelay();
+        return noDelayInstance;
     }
     public static Delay UNPACKINGDELAY(double currentTime){
         return new UnPackingDelay(currentTime);
@@ -26,17 +28,30 @@ public class Delays{
         public boolean isOver(double currentTime) {
             return true;
         }
+
+        @Override
+        public boolean isColored() {
+            return false;
+        }
     }
     private static class UnPackingDelay implements Delay {
         private double initalTime;
         private double delayTime;
         UnPackingDelay(double initalTime){
             this.initalTime=initalTime;
-            this.delayTime= SystemConfig.getInstance().DELAY_BAGS();
+            double aMean = SystemConfig.getInstance().DELAY_BAGS();
+            double aStd = SystemConfig.getInstance().DELAY_STD();
+            this.delayTime= RandomHelper.getGaussian(aMean,aStd);
+            this.delayTime= (delayTime<0)?0:delayTime;
         }
         @Override
         public boolean isOver(double currentTime) {
             return delayTime<currentTime-initalTime;
+        }
+
+        @Override
+        public boolean isColored() {
+            return true;
         }
     }
     private static class ReSeatingDelay implements Delay {
@@ -44,11 +59,19 @@ public class Delays{
         private double delayTime;
         ReSeatingDelay(double initalTime){
             this.initalTime=initalTime;
-            this.delayTime= SystemConfig.getInstance().DELAY_GETUP();
+            double aMean = SystemConfig.getInstance().DELAY_GETUP();
+            double aStd = SystemConfig.getInstance().DELAY_STD();
+            this.delayTime= RandomHelper.getGaussian(aMean,aStd);
+            this.delayTime= (delayTime<0)?0:delayTime;
         }
         @Override
         public boolean isOver(double currentTime) {
             return delayTime<currentTime-initalTime;
+        }
+
+        @Override
+        public boolean isColored() {
+            return true;
         }
     }
     private static class GhostDelay implements Delay {
@@ -62,6 +85,11 @@ public class Delays{
         public boolean isOver(double currentTime) {
             return delayTime<currentTime-initalTime;
         }
+
+        @Override
+        public boolean isColored() {
+            return false;
+        }
     }
     private static class MovementDelay implements Delay {
         private double initalTime;
@@ -73,6 +101,11 @@ public class Delays{
         @Override
         public boolean isOver(double currentTime) {
             return delayTime<currentTime-initalTime;
+        }
+
+        @Override
+        public boolean isColored() {
+            return false;
         }
     }
 }

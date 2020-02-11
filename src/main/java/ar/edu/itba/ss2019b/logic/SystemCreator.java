@@ -3,7 +3,6 @@ package ar.edu.itba.ss2019b.logic;
 import ar.edu.itba.ss2019b.SystemConfig;
 import ar.edu.itba.ss2019b.inter.Delay;
 import ar.edu.itba.ss2019b.model.*;
-import sun.security.krb5.Config;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -30,7 +29,7 @@ public final class SystemCreator {
         List<Location> goals = getGoalList();
         for(int i=0; i< SystemConfig.getInstance().PASSENGER_QUANITTY();i++){
             Location location = grid.getLocation(i,c.AIRPLANE_CENTER());
-            passengerMap.put(location,new Passenger(i,location,goals.get(i)));
+            passengerMap.put(location,new Passenger(i,location,goals.get(i),false));
         }
         return passengerMap;
     }

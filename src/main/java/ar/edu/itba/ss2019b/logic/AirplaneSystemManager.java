@@ -35,13 +35,14 @@ public class AirplaneSystemManager {
             Location currentLocation = p.getLocation();
             if(isReadyToMove(p, airplane, currentTime)){
                 Location nextLocation = getNextLocation(p);
-                Passenger nextPassenger = new Passenger(p.getId(),nextLocation,p.getGoal());
+                Passenger nextPassenger = new Passenger(p.getId(),nextLocation,p.getGoal(),false);
                 nextPassengerMap.put(nextLocation,nextPassenger);
 
                 addGhostDelay(currentLocation,airplane, currentTime);
                 addPassengerDelays(nextPassenger, airplane, currentTime);
             }else {
-                Passenger nextPassenger = new Passenger(p.getId(),currentLocation,p.getGoal());
+                boolean delayed = airplane.getDelayMap().getOrDefault(p.getId(),Delays.NODELAY()).isColored();
+                Passenger nextPassenger = new Passenger(p.getId(),currentLocation,p.getGoal(),delayed);
                 nextPassengerMap.put(currentLocation,nextPassenger);
             }
         }

@@ -6,11 +6,13 @@ public class Passenger {
     private int id;
     private Location location;
     private Location goal;
+    private boolean delayed;
 
-    public Passenger(int id, Location location, Location goal) {
+    public Passenger(int id, Location location, Location goal, boolean delayed) {
         this.id = id;
         this.location = location;
         this.goal = goal;
+        this.delayed = delayed;
     }
 
     public Location getLocation() {
@@ -32,8 +34,21 @@ public class Passenger {
         return Direction.DOWN;
     }
 
+    public boolean isDelayed(){
+        return delayed;
+    }
+
     public String stringify() {
-        String llego = (location.equals(goal))?"0":"255";
-        return location.getX()+" "+location.getY()+" "+0.5+" 0 "+llego+" 255\n";
+        String color = getColor();
+        return location.getX()+" "+location.getY()+" "+0.5+" "+color+"\n";
+    }
+
+    private String getColor() {
+        if(location.equals(goal))
+            return  "0 0 255";
+        if(delayed)
+            return  "255 0 0";
+        return "0 255 255";
+
     }
 }
