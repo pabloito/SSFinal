@@ -3,6 +3,7 @@ package ar.edu.itba.ss2019b.logic;
 import ar.edu.itba.ss2019b.SystemConfig;
 import ar.edu.itba.ss2019b.inter.Delay;
 import ar.edu.itba.ss2019b.model.*;
+import sun.security.krb5.Config;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -63,11 +64,10 @@ public final class SystemCreator {
 
     private static BufferedReader openSeatConfiguration() {
         try{
-            return new BufferedReader(new FileReader("seatConf.lsv")); //todo: file
+            return new BufferedReader(new FileReader(SystemConfig.getInstance().SEAT_PATH()));
         }catch (FileNotFoundException e) {
-            System.exit(1);
+            throw new IllegalArgumentException();
         }
-        return null;
     }
 
     private static Map<Integer, Delay> getDelayMap() {

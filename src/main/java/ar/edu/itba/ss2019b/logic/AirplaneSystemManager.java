@@ -21,7 +21,7 @@ public class AirplaneSystemManager {
     public Airplane getNextAirplane(Airplane airplane, double delta){
         if(counter==c.PASSENGER_QUANITTY()){
             System.out.printf("All %d passengers arrived!\n",counter);
-            System.exit(0);
+            throw new IllegalArgumentException();
         }
 
         resetMaps();

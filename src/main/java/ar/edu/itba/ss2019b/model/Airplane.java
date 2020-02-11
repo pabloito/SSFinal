@@ -25,4 +25,13 @@ public class Airplane {
     public double getTime() {
         return time;
     }
+
+    public String stringify() {
+        StringBuilder sb = new StringBuilder();
+
+        for(Passenger passenger : passengerMap.values())
+            sb.append(passenger.stringify());
+
+        return sb.toString();
+    }
 }

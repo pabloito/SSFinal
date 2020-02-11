@@ -18,6 +18,7 @@ public final class SystemConfig {
     private double DELAY_GHOST;
     private double DELAY_GETUP;
     private double DELAY_BAGS;
+    private double DELAY_MOVEMENT;
     private int AIRPLANE_HEIGHT;
     private int AIRPLANE_WIDTH;
     private int HORIZONTAL_OFFSET;
@@ -25,6 +26,7 @@ public final class SystemConfig {
     private int AIRPLANE_CENTER;
 
     private String OUTPUT_PATH;
+    private String SEAT_PATH;
 
     private static SystemConfig instance;
 
@@ -42,7 +44,7 @@ public final class SystemConfig {
         }
         catch (ParserConfigurationException | IOException | SAXException e){
             System.err.println("Invalid XML file. '"+e.getMessage()+"'");
-            System.exit(-1);
+            throw new IllegalArgumentException();
         }
         PASSENGER_QUANITTY = (this.AIRPLANE_HEIGHT-1)*this.AIRPLANE_WIDTH;
         HORIZONTAL_OFFSET = PASSENGER_QUANITTY;
@@ -64,11 +66,13 @@ public final class SystemConfig {
         String DELAY_GHOST = document.getElementsByTagName("DELAY_GHOST").item(0).getTextContent();
         String DELAY_GETUP = document.getElementsByTagName("DELAY_GETUP").item(0).getTextContent();
         String DELAY_BAGS = document.getElementsByTagName("DELAY_BAGS").item(0).getTextContent();
+        String DELAY_MOVEMENT = document.getElementsByTagName("DELAY_MOVEMENT").item(0).getTextContent();
 
         String AIRPLANE_WIDTH = document.getElementsByTagName("AIRPLANE_WIDTH").item(0).getTextContent();
         String AIRPLANE_HEIGHT = document.getElementsByTagName("AIRPLANE_HEIGHT").item(0).getTextContent();
 
         this.OUTPUT_PATH = document.getElementsByTagName("OUTPUT_PATH").item(0).getTextContent();
+        this.SEAT_PATH = document.getElementsByTagName("SEAT_PATH").item(0).getTextContent();
 
         this.SIMULATION_DELTA_TIME = Double.parseDouble(SIMULATION_DELTA_TIME);
         this.FRAMES_PER_PRINT = Integer.parseInt(FRAMES_PER_PRINT);
@@ -77,6 +81,7 @@ public final class SystemConfig {
         this.DELAY_GHOST = Double.parseDouble(DELAY_GHOST);
         this.DELAY_GETUP = Double.parseDouble(DELAY_GETUP);
         this.DELAY_BAGS = Double.parseDouble(DELAY_BAGS);
+        this.DELAY_MOVEMENT = Double.parseDouble(DELAY_MOVEMENT);
 
         this.AIRPLANE_HEIGHT = Integer.parseInt(AIRPLANE_HEIGHT);
         this.AIRPLANE_WIDTH = Integer.parseInt(AIRPLANE_WIDTH);
@@ -94,6 +99,10 @@ public final class SystemConfig {
     public int HORIZONTAL_OFFSET(){return HORIZONTAL_OFFSET;}
     public int VERTICAL_OFFSET(){return VERTICAL_OFFSET;}
     public String OUTPUT_PATH(){return OUTPUT_PATH;}
+    public String SEAT_PATH(){return SEAT_PATH;}
     public int AIRPLANE_CENTER(){return AIRPLANE_CENTER;}
 
+    public double DELAY_MOVEMENT() {
+        return DELAY_MOVEMENT;
+    }
 }

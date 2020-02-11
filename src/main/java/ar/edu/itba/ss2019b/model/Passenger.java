@@ -31,4 +31,9 @@ public class Passenger {
         if(location.getY()<goal.getY()) return Direction.UP;
         return Direction.DOWN;
     }
+
+    public String stringify() {
+        String llego = (location.equals(goal))?"0":"255";
+        return location.getX()+" "+location.getY()+" "+0.5+" 0 "+llego+" 255\n";
+    }
 }

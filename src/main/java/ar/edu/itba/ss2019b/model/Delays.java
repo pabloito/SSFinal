@@ -1,5 +1,6 @@
 package ar.edu.itba.ss2019b.model;
 
+import ar.edu.itba.ss2019b.SystemConfig;
 import ar.edu.itba.ss2019b.inter.Delay;
 
 public class Delays{
@@ -28,42 +29,50 @@ public class Delays{
     }
     private static class UnPackingDelay implements Delay {
         private double initalTime;
+        private double delayTime;
         UnPackingDelay(double initalTime){
             this.initalTime=initalTime;
+            this.delayTime= SystemConfig.getInstance().DELAY_BAGS();
         }
         @Override
         public boolean isOver(double currentTime) {
-            return true; //todo
+            return delayTime<currentTime-initalTime;
         }
     }
     private static class ReSeatingDelay implements Delay {
         private double initalTime;
+        private double delayTime;
         ReSeatingDelay(double initalTime){
             this.initalTime=initalTime;
+            this.delayTime= SystemConfig.getInstance().DELAY_GETUP();
         }
         @Override
         public boolean isOver(double currentTime) {
-            return true; //todo
+            return delayTime<currentTime-initalTime;
         }
     }
     private static class GhostDelay implements Delay {
         private double initalTime;
+        private double delayTime;
         GhostDelay(double initalTime){
             this.initalTime=initalTime;
+            this.delayTime= SystemConfig.getInstance().DELAY_GHOST();
         }
         @Override
         public boolean isOver(double currentTime) {
-            return true; //todo
+            return delayTime<currentTime-initalTime;
         }
     }
     private static class MovementDelay implements Delay {
         private double initalTime;
+        private double delayTime;
         MovementDelay(double initalTime){
             this.initalTime=initalTime;
+            this.delayTime= SystemConfig.getInstance().DELAY_MOVEMENT();
         }
         @Override
         public boolean isOver(double currentTime) {
-            return true; //todo
+            return delayTime<currentTime-initalTime;
         }
     }
 }
