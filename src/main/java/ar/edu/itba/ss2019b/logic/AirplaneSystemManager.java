@@ -4,6 +4,7 @@ import ar.edu.itba.ss2019b.SystemConfig;
 import ar.edu.itba.ss2019b.inter.Delay;
 import ar.edu.itba.ss2019b.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class AirplaneSystemManager {
     public Airplane getNextAirplane(Airplane airplane, double delta){
         resetMaps();
         calculatePositionsAndDelays(airplane,delta);
-        return new Airplane(airplane.getTime()+delta,nextPassengerMap,nextDelayMap, counter);
+        return new Airplane(airplane.getTime()+delta,nextPassengerMap,nextDelayMap, counter, airplane.getPassengerSatIds());
     }
 
     private void resetMaps() {
@@ -34,7 +35,7 @@ public class AirplaneSystemManager {
         for(Passenger p : airplane.getPassengerMap().values()){
             Location currentLocation = p.getLocation();
             if(isReadyToMove(p, airplane, currentTime)){
-                Location nextLocation = getNextLocation(p);
+                Location nextLocation = getNextLocation(p, airplane);
                 Passenger nextPassenger = new Passenger(p.getId(),nextLocation,p.getGoal(),false);
                 nextPassengerMap.put(nextLocation,nextPassenger);
 
@@ -49,11 +50,12 @@ public class AirplaneSystemManager {
 
     }
 
-    private Location getNextLocation(Passenger p) {
+    private Location getNextLocation(Passenger p, Airplane airplane) {
         if(p.getDirection()==Direction.RIGHT)
             return grid.getNextLocation(p.getLocation(),Direction.RIGHT);
         System.out.printf("Passenger %d arrived at Location x: %d, y: %d\n",p.getId(),p.getGoal().getX(),p.getGoal().getY());
         counter++;
+        airplane.addPassengerSatId(p.getId());
         return p.getGoal();
     }
 

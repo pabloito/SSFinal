@@ -104,7 +104,9 @@ public final class SystemConfig {
     public int HORIZONTAL_OFFSET(){return HORIZONTAL_OFFSET;}
     public int VERTICAL_OFFSET(){return VERTICAL_OFFSET;}
     public String OUTPUT_PATH(){return OUTPUT_PATH;}
+    public void set_OUTPUT_PATH(String newPath){this.OUTPUT_PATH = newPath;}
     public String SEAT_PATH(){return SEAT_PATH;}
+    public void set_SEAT_PATH(String newPath){this.SEAT_PATH = newPath;}
     public int AIRPLANE_CENTER(){return AIRPLANE_CENTER;}
 
     public double DELAY_MOVEMENT() {

@@ -14,8 +14,8 @@ public class AirplaneSystemPrinter {
     public AirplaneSystemPrinter(){
         this.c = SystemConfig.getInstance();
 
-        PARTICLE_OUTPUT_PATH = c.OUTPUT_PATH()+"/"+"particle.ov";
-        METRIC_OUTPUT_PATH = c.OUTPUT_PATH()+"/metrics.csv";
+        PARTICLE_OUTPUT_PATH = c.OUTPUT_PATH()+"particle.ov";
+        METRIC_OUTPUT_PATH = c.OUTPUT_PATH()+"metrics.csv";
 
         Helper.resetFile(PARTICLE_OUTPUT_PATH);
         Helper.resetFile(METRIC_OUTPUT_PATH);
@@ -35,7 +35,8 @@ public class AirplaneSystemPrinter {
 
     public void printAirplaneMetrics(Airplane airplane) {
         String sb = String.valueOf(airplane.getTime()) + ',' +
-                airplane.getPassengersSat() + '\n';
+                airplane.getPassengersSat() + ',' + airplane.getPassengerSatIds().toString() + '\n';
+        airplane.emptyPassengerSatIds();
         Helper.appendToFile(sb,METRIC_OUTPUT_PATH);
     }
 }

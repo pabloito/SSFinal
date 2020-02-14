@@ -19,7 +19,7 @@ public final class SystemCreator {
     public static Airplane getInitialSystem() throws IOException {
         Map<Location, Passenger> passengerMap = getPassengerMap();
         Map<Integer, Delay> delayMap = getDelayMap();
-        return new Airplane(0,passengerMap, delayMap, 0);
+        return new Airplane(0,passengerMap, delayMap, 0, new ArrayList());
     }
 
     private static Map<Location, Passenger> getPassengerMap() throws IOException {
