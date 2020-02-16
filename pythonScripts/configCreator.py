@@ -10,6 +10,16 @@ def printSeats(f, row):
     for i in range(1,lastrow+1):
         f.write(str(i)+row+'\n')
 
+def printEvenSeats(f, row):
+    for i in range(1,lastrow+1):
+        if i % 2 == 0:
+            f.write(str(i)+row+'\n')
+
+def printOddSeats(f, row):
+    for i in range(1,lastrow+1):
+        if i % 2 == 1:
+            f.write(str(i)+row+'\n')
+
 #CONFIG FUNCTIONS
 # Configuracion de Prueba 'Random'
 def randomConfig(f):
@@ -104,6 +114,14 @@ def front2BackGroupsConfig(f):
 
     for i in reversed(range(len(passengers))):
         f.write(passengers[i])
+
+# Configuracion de Steffen perfect
+def steffenPerfect(f):
+    for order in range(int(len(seats)/2)):
+        printOddSeats(f, seats[order])
+        printOddSeats(f, seats[len(seats)-order-1])
+        printEvenSeats(f, seats[order])
+        printEvenSeats(f, seats[len(seats)-order-1])
 
 #FILE BUILDER
 configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, groupsConfig]
