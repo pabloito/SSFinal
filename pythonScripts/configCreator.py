@@ -5,6 +5,11 @@ lastrow = 30
 configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups"]
 notImplementedConfigs = ["MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"]
 
+#Generic functions
+def printSeats(row):
+    for i in range(1,lastrow+1):
+        print(str(i)+row+'\n')
+
 #CONFIG FUNCTIONS
 # Configuracion de Prueba 'Random'
 def randomConfig(f):
@@ -28,11 +33,11 @@ def front2BackConfig(f):
         for s in seats:
             f.write(str(i)+s+'\n')
 
-# Configuracion de Prueba 'Columna A despues B despues C ....'
+# Configuracion de Prueba 'Ventana medio pasillo'
 def windowMiddleAisleConfig(f):
-    for s in seats:
-        for i in range(1,lastrow+1):
-            f.write(str(i)+s+'\n')
+    for order in range(int(len(seats)/2)):
+        printSeats(seats[order])
+        printSeats(seats[len(seats)-order-1])
 
 # Configuracion por grupos Atras para Adelante
 def groupsConfig(f):
