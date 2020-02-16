@@ -2,7 +2,7 @@ import random
 
 lastrow = 30
 #CONFIGS
-configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups"]
+configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups", "Front2BackGroups", "SteffenPerfect"]
 notImplementedConfigs = ["MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"]
 
 #Generic functions
@@ -124,7 +124,7 @@ def steffenPerfect(f):
         printEvenSeats(f, seats[len(seats)-order-1])
 
 #FILE BUILDER
-configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, groupsConfig]
+configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, groupsConfig, front2BackGroupsConfig, steffenPerfect]
 iterationIndex = 0
 for folder in configs:
     filename = "../" + folder + "/input/seatConfig"
