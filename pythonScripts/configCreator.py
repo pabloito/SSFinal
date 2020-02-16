@@ -2,7 +2,7 @@ import random
 
 lastrow = 30
 #CONFIGS
-configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups", "Front2BackGroups", "SteffenPerfect"]
+configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"]
 notImplementedConfigs = ["MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"]
 
 #Generic functions
@@ -19,6 +19,24 @@ def printOddSeats(f, row):
     for i in range(1,lastrow+1):
         if i % 2 == 1:
             f.write(str(i)+row+'\n')
+
+def addEvenSeats(array, row):
+    for i in range(1,lastrow+1):
+        if i % 2 == 0:
+            array.append(str(i)+row+'\n')
+
+def addOddSeats(array, row):
+    for i in range(1,lastrow+1):
+        if i % 2 == 1:
+            array.append(str(i)+row+'\n')
+
+def copyArray(fromArray, toArray):
+    for i in range(len(fromArray)):
+            toArray.append(fromArray[i])
+
+def printArray(f, arr):
+    for i in range(len(arr)):
+            f.write(arr[i])
 
 #CONFIG FUNCTIONS
 # Configuracion de Prueba 'Random'
@@ -123,8 +141,42 @@ def steffenPerfect(f):
         printEvenSeats(f, seats[order])
         printEvenSeats(f, seats[len(seats)-order-1])
 
+def steffenModed(f):
+    passengers = []
+    newPassengers = []
+
+    #Step 1
+    for i in range(int(len(seats)/2)):
+        addOddSeats(newPassengers, seats[i])
+    random.shuffle(newPassengers)
+    copyArray(newPassengers, passengers)
+    newPassengers = []
+
+    #Step 2
+    for i in range(int(len(seats)/2), len(seats)):
+        addOddSeats(newPassengers, seats[i])
+    random.shuffle(newPassengers)
+    copyArray(newPassengers, passengers)
+    newPassengers = []
+
+    #Step 3
+    for i in range(int(len(seats)/2)):
+        addEvenSeats(newPassengers, seats[i])
+    random.shuffle(newPassengers)
+    copyArray(newPassengers, passengers)
+    newPassengers = []
+
+    #Step 4
+    for i in range(int(len(seats)/2), len(seats)):
+        addEvenSeats(newPassengers, seats[i])
+    random.shuffle(newPassengers)
+    copyArray(newPassengers, passengers)
+    newPassengers = []
+
+    printArray(f, passengers)
+
 #FILE BUILDER
-configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, groupsConfig, front2BackGroupsConfig, steffenPerfect]
+configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, groupsConfig, front2BackGroupsConfig, steffenPerfect, steffenModed]
 iterationIndex = 0
 for folder in configs:
     filename = "../" + folder + "/input/seatConfig"
