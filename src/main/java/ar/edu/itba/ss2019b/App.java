@@ -18,7 +18,7 @@ public class App
     public static void main( String[] args ) throws IOException {
         SystemConfig c = SystemConfig.getInstance();
         //ToDo: acomodar esto en el config file
-        String configs[] = {"Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups"};
+        String configs[] = {"Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"};
         String remainingConfigs[] = {"MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"};
         for(String config: configs){
             for(int rounds=0; rounds < 10; rounds++){

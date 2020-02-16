@@ -1,8 +1,9 @@
 import random
 
 lastrow = 30
+groups = 4
 #CONFIGS
-configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "BigGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"]
+configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"]
 notImplementedConfigs = ["MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"]
 
 #Generic functions
@@ -68,8 +69,7 @@ def windowMiddleAisleConfig(f):
         printSeats(f, seats[len(seats)-order-1])
 
 # Configuracion por grupos Atras para Adelante
-def groupsConfig(f):
-    groups = 4
+def back2FrontGroupsConfig(f):
     group_lengths = []
     extra_rows = lastrow%groups
     base_group_length = lastrow//groups
@@ -102,7 +102,6 @@ def groupsConfig(f):
 
 # Configuracion por grupos Adelante para Atras
 def front2BackGroupsConfig(f):
-    groups = 4
     group_lengths = []
     extra_rows = lastrow%groups
     base_group_length = lastrow//groups
@@ -176,7 +175,7 @@ def steffenModed(f):
     printArray(f, passengers)
 
 #FILE BUILDER
-configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, groupsConfig, front2BackGroupsConfig, steffenPerfect, steffenModed]
+configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, back2FrontGroupsConfig, front2BackGroupsConfig, steffenPerfect, steffenModed]
 iterationIndex = 0
 for folder in configs:
     filename = "../" + folder + "/input/seatConfig"
