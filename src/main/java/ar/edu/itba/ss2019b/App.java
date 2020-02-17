@@ -21,7 +21,7 @@ public class App
         String configs[] = {"Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"};
         String remainingConfigs[] = {"MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"};
         for(String config: configs){
-            for(int rounds=0; rounds < 10; rounds++){
+            for(int rounds=0; rounds < 100; rounds++){
                 c.set_SEAT_PATH(config + "/input/seatConfig" + rounds + ".lsv");
                 c.set_OUTPUT_PATH(config + "/output/" + rounds);
 

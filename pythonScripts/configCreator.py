@@ -181,7 +181,7 @@ for folder in configs:
     filename = "../" + folder + "/input/seatConfig"
     arrangeMentFunction = configsFunctions[iterationIndex]
     #[START FILE] Hago 10 iteraciones sobre el proceso de creacion de configuracion
-    for w in range(0,10):
+    for w in range(0,100):
         f = open(filename + str(w) + ".lsv", "w")
         seats = ['A','B','C','E','F','G']
         arrangeMentFunction(f)
