@@ -61,6 +61,6 @@ for config in configs:
     plt.legend(loc='lower right')
     plt.xticks(plotEveryX)
     plt.grid(ls='--')
-    plt.savefig('../'+config+'/sentadosVsTiempo')
+    plt.savefig('../graficos/sentadosVsTiempo' + config)
     plt.show()
     iterationIndex += 1

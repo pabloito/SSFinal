@@ -6,7 +6,7 @@ import pylab as pl
 
 
 #input
-configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"]
+configs = ["Random", "SteffenModed", "Back2FrontGroups", "Front2BackGroups", "Back2Front", "Front2Back", "SteffenPerfect", "WindowMiddleAisle"]
 metricsLoad = []
 plotCollection = []
 
@@ -23,8 +23,23 @@ color = ['-.r', '-.g', '-.b', '-.c', '-.m', '-.y', '-.k','-.m']
 #plot
 iterationIndex = 0
 for collection in plotCollection:
+    if iterationIndex == 4 or iterationIndex == 6:
+        pl.legend()
+        pl.savefig('../graficos/iteration'+str(iterationIndex))
+        pl.show() 
     fit = stats.norm.pdf(collection, np.mean(collection), np.std(collection))
-    pl.plot(collection,fit,color[iterationIndex])
+    pl.plot(collection,fit,color[iterationIndex], label=configs[iterationIndex])
     iterationIndex += 1
 
+pl.legend()
+pl.savefig('../graficos/iteration'+str(iterationIndex))
 pl.show()
+
+iterationIndex = 0
+for collection in plotCollection:
+    fit = stats.norm.pdf(collection, np.mean(collection), np.std(collection))
+    pl.plot(collection,fit,color[iterationIndex], label=configs[iterationIndex])
+    iterationIndex += 1
+pl.legend()
+pl.savefig('../graficos/general')
+pl.show() 

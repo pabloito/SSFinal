@@ -18,8 +18,9 @@ public class App
     public static void main( String[] args ) throws IOException {
         SystemConfig c = SystemConfig.getInstance();
         //ToDo: acomodar esto en el config file
-        String configs[] = {"Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"};
-        String remainingConfigs[] = {"MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"};
+        String configs[] = {"Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed", "Wilma"};
+        String customConfigs[] = { "Back2FrontGroupsSpecial"};
+        String reRunConfigs[] = { "Wilma"};
         for(String config: configs){
             for(int rounds=0; rounds < 100; rounds++){
                 c.set_SEAT_PATH(config + "/input/seatConfig" + rounds + ".lsv");
@@ -49,5 +50,36 @@ public class App
                 }
             }
         }
+//        for(String config: customConfigs){
+//            for(int groupAmounts=2;groupAmounts<11;groupAmounts+=2){
+//                for(int rounds=0; rounds < 100; rounds++){
+//                    c.set_SEAT_PATH(config +"/"+groupAmounts+ "/input/seatConfig" + rounds + ".lsv");
+//                    c.set_OUTPUT_PATH(config +"/"+groupAmounts+ "/output/" + rounds);
+//
+//                    AirplaneSystemManager asm = new AirplaneSystemManager();
+//                    AirplaneSystemPrinter asp = new AirplaneSystemPrinter();
+//                    Airplane airplane = SystemCreator.getInitialSystem();
+//                    double delta = 0.05;
+//                    int counter =0;
+//                    boolean stop=false;
+//                    while(!stop){
+//                        if(counter%20==0) {
+//                            asp.printAirplane(airplane);
+//                            asp.printAirplaneMetrics(airplane);
+//                            System.out.printf("Running and Printing step #%d\n", counter);
+//                        }
+//                        airplane = asm.getNextAirplane(airplane,delta);
+//
+//                        if(airplane.getPassengersSat()==c.PASSENGER_QUANITTY()){
+//                            System.out.printf("All %d passengers arrived!\n",airplane.getPassengersSat());
+//                            stop = true;
+//                            asp.printAirplane(airplane);
+//                            asp.printAirplaneMetrics(airplane);
+//                        }
+//                        counter++;
+//                    }
+//                }
+//            }
+//        }
     }
 }

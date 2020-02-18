@@ -3,13 +3,22 @@ import random
 lastrow = 30
 groups = 4
 #CONFIGS
+configsCustom = [ "Wilma"]
 configs = ["Random", "Back2Front", "Front2Back", "WindowMiddleAisle", "Back2FrontGroups", "Front2BackGroups", "SteffenPerfect", "SteffenModed"]
-notImplementedConfigs = ["MidGroups", "SmallGroups", "SteffenPerfect", "SteffenModed"]
 
 #Generic functions
 def printSeats(f, row):
     for i in range(1,lastrow+1):
         f.write(str(i)+row+'\n')
+
+def printSeatsRandom(f, row, row2):
+    aux =[]
+    for i in range(1,lastrow+1):
+        aux.append(str(i)+row+'\n')
+        aux.append(str(i)+row2+'\n')
+    random.shuffle(aux)
+    for elem in aux:
+        f.write(elem)
 
 def printEvenSeats(f, row):
     for i in range(1,lastrow+1):
@@ -64,9 +73,14 @@ def front2BackConfig(f):
 
 # Configuracion de Prueba 'Ventana medio pasillo'
 def windowMiddleAisleConfig(f):
-    for order in range(int(len(seats)/2)):
+    for order in reversed(range(int(len(seats)/2))):
         printSeats(f, seats[order])
         printSeats(f, seats[len(seats)-order-1])
+
+# Configuracion de Prueba 'Ventana medio pasillo - random'
+def wilmaConfig(f):
+    for order in reversed(range(int(len(seats)/2))):
+        printSeatsRandom(f, seats[order], seats[len(seats)-order-1])
 
 # Configuracion por grupos Atras para Adelante
 def back2FrontGroupsConfig(f):
@@ -134,7 +148,7 @@ def front2BackGroupsConfig(f):
 
 # Configuracion de Steffen perfect
 def steffenPerfect(f):
-    for order in range(int(len(seats)/2)):
+    for order in reversed(range(int(len(seats)/2))):
         printOddSeats(f, seats[order])
         printOddSeats(f, seats[len(seats)-order-1])
         printEvenSeats(f, seats[order])
@@ -176,10 +190,17 @@ def steffenModed(f):
 
 #FILE BUILDER
 configsFunctions = [randomConfig, back2FrontConfig, front2BackConfig, windowMiddleAisleConfig, back2FrontGroupsConfig, front2BackGroupsConfig, steffenPerfect, steffenModed]
+configsCustomFunctions = [wilmaConfig]
 iterationIndex = 0
-for folder in configs:
+
+#for folder in configs:
+for folder in configsCustom:
+    #for groupAmount in range(2,12,2):
     filename = "../" + folder + "/input/seatConfig"
-    arrangeMentFunction = configsFunctions[iterationIndex]
+        #groups = groupAmount
+        #filename = "../" + folder +'/'+ str(groupAmount) +"/input/seatConfig"
+        #arrangeMentFunction = back2FrontGroupsConfig
+    arrangeMentFunction = configsCustomFunctions[iterationIndex]
     #[START FILE] Hago 10 iteraciones sobre el proceso de creacion de configuracion
     for w in range(0,100):
         f = open(filename + str(w) + ".lsv", "w")
